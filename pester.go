@@ -165,6 +165,13 @@ func jitter(i int) time.Duration {
 	return time.Duration(ms) * time.Millisecond
 }
 
+func (c *Client) SetOptions(options ...ApplyOptions) *Client {
+	for _, applyOption := range options {
+		applyOption(c)
+	}
+	return c
+}
+
 // Wait blocks until all pester requests have returned
 // Probably not that useful outside of testing.
 func (c *Client) Wait() {
